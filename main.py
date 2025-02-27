@@ -5,17 +5,16 @@ import time
 from dotenv import load_dotenv
 import geocoder
 
-g = geocoder.ip('me')
-
-print(g)
 
 load_dotenv()
 
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 
-CITY = g.city 
-COUNTRY_CODE = g.country 
+location = geocoder.ip('me')
+
+CITY = location.city 
+COUNTRY_CODE = location.country 
 
 IMAGE_PATH = os.path.abspath("./weather_wallpaper.jpg")
 
