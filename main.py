@@ -24,7 +24,7 @@ def get_weather():
     data = response.json()
 
     if response.status_code == 200:
-        weather_desc = data['weather'][0]['description'].lower()  
+        weather_desc = data['weather'][0]['main'].lower()  
         print(f"Current Weather: {weather_desc}")
         return weather_desc
     else:
