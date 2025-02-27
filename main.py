@@ -3,14 +3,19 @@ import requests
 import schedule
 import time
 from dotenv import load_dotenv
+import geocoder
+
+g = geocoder.ip('me')
+
+print(g)
 
 load_dotenv()
 
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 
-CITY = "Galle" 
-COUNTRY_CODE = "LK" 
+CITY = g.city 
+COUNTRY_CODE = g.country 
 
 IMAGE_PATH = os.path.abspath("./weather_wallpaper.jpg")
 
@@ -20,7 +25,7 @@ def get_weather():
     data = response.json()
 
     if response.status_code == 200:
-        weather_desc = data['weather'][0]['main'].lower()  
+        weather_desc = data['weather'][0]['description'].lower()  
         print(f"Current Weather: {weather_desc}")
         return weather_desc
     else:
