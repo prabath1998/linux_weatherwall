@@ -2,6 +2,9 @@ import os
 import requests
 import schedule
 import time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
@@ -25,7 +28,6 @@ def get_weather():
         return None
 
 def download_image(query):
-    """Download an image from Unsplash based on the weather condition."""
     url = f"https://api.unsplash.com/photos/random?query={query}&orientation=landscape&client_id={UNSPLASH_ACCESS_KEY}"
     response = requests.get(url)
     data = response.json()
@@ -54,7 +56,7 @@ def update_wallpaper():
 
 schedule.every(1).minutes.do(update_wallpaper)
 
-print("Weather wallpaper updater running... Press Ctrl+C to stop.")
+print("Weather wallpaper updater running... ")
 while True:
     schedule.run_pending()
     time.sleep(30)  
